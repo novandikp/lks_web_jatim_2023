@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
             box.style.gridColumn = columnIndex;
             box.style.gridRow = rowIndex;
             const delay = (index + 1)
+
             box.style.animation = '1s ease-out ' + delay + 's forwards disappear';
         });
     }

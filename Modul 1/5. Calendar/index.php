@@ -31,9 +31,6 @@ $nextYear = $currentMonth == 12 ? $currentYear + 1 : $currentYear;
 
 $prevMonth = $currentMonth == 1 ? 12 : $currentMonth - 1;
 $prevYear = $currentMonth == 1 ? $currentYear - 1 : $currentYear;
-
-
-
 ?>
 
 <!DOCTYPE html>
