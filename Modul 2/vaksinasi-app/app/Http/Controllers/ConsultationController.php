@@ -18,7 +18,7 @@ class ConsultationController extends Controller
         $data = Consultation::with('doctor')->where('society_id', $request->society->id);
         $data =
             $data->select('id', 'status', 'disease_history', 'current_symptoms', 'doctor_notes', 'doctor_id')
-            ->get();
+        ->orderBy('id', 'desc')->first();
         return response()->json([
             'message' => 'success',
             'data' => $data

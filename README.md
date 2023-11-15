@@ -8,5 +8,9 @@
 5. Calendar PHP
 6. XML2JSON PHP
 
+## Modul 2
+RESTFUl API Laravel
 
+## Modul 3
+Frontend: ReactJS
 
