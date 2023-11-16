@@ -1,0 +1,207 @@
+body,
+p,
+h5,
+h4,
+h3 {
+    margin: 0
+}
+
+body {
+    background-color: #080b0e;
+}
+
+.screen {
+    width: 100%;
+    height: 100vh;
+    display: none !important;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.screen.active {
+    display: flex !important;
+}
+
+
+.dialog {
+    min-width: 350px;
+    background-color: #1c282a;
+    color: white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.dialog .dialog-title {
+    font-size: 1.5rem;
+    font-weight: bolder;
+    margin-bottom: 1rem;
+}
+
+.dialog .dialog-content {
+    font-size: 1.3rem;
+}
+
+
+.dialog .dialog-content ol {
+    margin: 0;
+    padding: 0;
+    text-align: start;
+    margin-left: 10px;
+    margin-bottom: 12px;
+
+}
+
+.dialog .dialog-content ol li {
+    margin-top: 8px;
+}
+
+.form-control {
+    padding: 0.5rem 1rem;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    display: block;
+    width: 85%;
+}
+
+.btn {
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.btn.btn-primary {
+    background-color: #fe0106;
+}
+
+.btn.btn-secondary {
+    background-color: #111f20;
+    border: 1px solid #364d51;
+}
+
+.btn.disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.button-group {
+    margin: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.mt-1 {
+    margin-top: 1rem;
+}
+
+.mt-2 {
+    margin-top: 2rem;
+}
+
+.mt-3 {
+    margin-top: 3rem;
+}
+
+.mx-1 {
+    margin-left: 2rem;
+    margin-right: 2rem;
+}
+
+.countdown {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.countdown .countdown-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 1rem;
+}
+
+.countdown .countdown-counter {
+    font-size: 3.5rem;
+    font-weight: bold;
+    color: white;
+    animation: count 1s infinite;
+}
+
+.sidebar {
+    min-width: 15%;
+    height: 100vh;
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.player-info {
+    margin-top: 20px;
+}
+
+.player-info .player-info-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px;
+    font-size: 1.3rem;
+}
+
+.menu-control {
+    margin-top: 20px;
+    background-color: #2a3338;
+    padding: 30px 10px;
+    min-height: 20vh;
+    border-top-right-radius: 10%;
+    border-bottom-right-radius: 10%;
+}
+
+.menu-control .menu-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.menu-control .menu-detail {
+    margin-top: 30px;
+}
+
+.screen-overlay {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+
+/* Animation */
+@keyframes count {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
