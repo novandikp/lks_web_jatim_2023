@@ -17,7 +17,7 @@ class SpotController extends Controller
      */
     public function index(Request $request)
     {
-        $data = Spot::with('vaccines')->get();
+        $data = Spot::with('vaccines')->where('regional_id', $request->society->regional_id)->get();
         $vaccines = Vaccine::all();
 
         $result = [];

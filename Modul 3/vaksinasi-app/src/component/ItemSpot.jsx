@@ -5,14 +5,14 @@ const ItemSpot = ({spot,dose}) => {
     const serve = spot.serve == 1 ? 'First': spot.serve == 2 ? 'Second' : 'Both';
     const handleSpotClick=()=>{
         if (serve==dose || serve=='Both'){
-            window.location.href = '#vaccination';
+            window.location.href = '#vaccination/'+spot.id;
         }
     }
     
     const vaccine = Object.keys(spot.available_vaccines).join(', ');
-    
+    const isServe = serve==dose || serve=='Both';
     return (
-        <Card style={{cursor:"pointer"}} onClick={handleSpotClick} border="0" className={serve==dose || serve=='Both'? "my-3 bg-light":"my-3 bg-white"}>
+        <Card style={{cursor:  isServe ? "pointer" : "auto"}} onClick={handleSpotClick} border="0" className={serve==dose || serve=='Both'? "my-3 bg-light":"my-3 bg-white"}>
             <Card.Body>
                 <Row>
                     <Col>

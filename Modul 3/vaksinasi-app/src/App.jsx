@@ -27,7 +27,7 @@ const router = createHashRouter([
             </PrivatePage>
   },
   {
-    path:'/vaccination',
+    path:'/vaccination/:spotId',
     element:<PrivatePage>
               <RegisterVaccination/>
             </PrivatePage>
