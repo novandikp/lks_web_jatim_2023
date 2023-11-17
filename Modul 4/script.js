@@ -3,6 +3,9 @@ document.addEventListener('DOMContentLoaded', function () {
     let intervalCountdown = null
     let intervalTimer = null
     let playerName = ''
+    const buttonHeight = 100;
+    const lineHeight = 10;
+    const dangerHeight = 400;
 
     // Event Listener
     // keyup document
@@ -56,6 +59,13 @@ document.addEventListener('DOMContentLoaded', function () {
     })
 
     // function
+    const getCanvas = () => {
+        return document.getElementById('game-canvas');
+    }
+
+    const getContext = () => {
+        return getCanvas().getContext('2d');
+    }
 
     const checkPlayerInput = () => {
         const input = document.querySelector('.form-control').value;
@@ -152,6 +162,52 @@ document.addEventListener('DOMContentLoaded', function () {
         checkPlayerInput();
     }
 
-    openInstructionScreen();
 
+    // Component Game
+    const drawTile = (x) => {
+        const context = getContext();
+        const height = getCanvas().height;
+        context.fillStyle = '#282f35';
+        context.fillRect(x, 0, 100, height);
+    }
+
+    const drawButton = (x) => {
+        const context = getContext();
+        const y = getCanvas().height - buttonHeight;
+        context.fillStyle = '#3b8bad';
+        context.fillRect(x, y, 100, buttonHeight);
+    }
+
+    const drawLine = () => {
+        const context = getContext();
+        const y = getCanvas().height - (buttonHeight + lineHeight);
+        console.log(y);
+        context.fillStyle = '#5b6274';
+        context.fillRect(0, y, getCanvas().width, lineHeight);
+    }
+
+    const drawDangerZone = (x) => {
+        const context = getContext();
+        const y = getCanvas().height - (buttonHeight + lineHeight + dangerHeight);
+        context.globalAlpha = 0.4;
+        context.fillStyle = '#ff0000';
+        context.fillRect(x, y, 100, dangerHeight);
+        context.globalAlpha = 1;
+    }
+
+    const background = () => {
+        const arrayPosition = [0, 101, 202, 303]
+        arrayPosition.forEach(position => {
+            drawTile(position);
+            drawButton(position);
+
+        });
+        drawLine();
+        arrayPosition.forEach(position => {
+            drawDangerZone(position);
+        });
+    }
+    // End of Component Game
+    openInstructionScreen();
+    background();
 });

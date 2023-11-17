@@ -198,6 +198,10 @@ body {
 }
 
 
+#game-canvas {
+    height: 100vh;
+    background-color: white;
+}
 /* Animation */
 @keyframes count {
     0% {
