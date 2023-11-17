@@ -2,11 +2,13 @@ document.addEventListener('DOMContentLoaded', function () {
     let stateGame = 'instruction'
     let intervalCountdown = null
     let intervalTimer = null
+    let invervalGame = null
+    let intervalVirus = null
     let playerName = ''
-    const buttonHeight = 100;
+    const buttonHeight = 150;
     const lineHeight = 10;
     const dangerHeight = 400;
-
+    const virusList = [];
     // Event Listener
     // keyup document
     document.querySelector('#main-screen').addEventListener('keydown', function (e) {
@@ -87,6 +89,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 clearInterval(intervalCountdown);
                 setActiveScreen('main-screen', true);
                 startTimer(true);
+                draw();
             }
         }, 1000);
     }
@@ -162,8 +165,58 @@ document.addEventListener('DOMContentLoaded', function () {
         checkPlayerInput();
     }
 
+    // Component
+    class Virus {
+        constructor() {
+            this.width = 100;
+            this.height = 100;
+            this.y = 0;
+            this.step = 10;
+            this.xList = [0, 101, 202, 303];
+            this.x = this.xList[Math.round(Math.random() * this.xList.length)];
+            while (this.isStack()) {
+                this.x = this.xList[Math.round(Math.random() * this.xList.length)];
+            }
+            this.context = getContext();
+        }
 
-    // Component Game
+        isDraw() {
+            return this.y < (getCanvas().height - (buttonHeight + lineHeight + this.height));
+        }
+
+        isDanger = () => {
+            return this.y >= (getCanvas().height - (buttonHeight + lineHeight + dangerHeight + this.height));
+        }
+
+
+
+        isStack = () => {
+            virusList.forEach(virus => {
+
+                if (this.y + this.height > virus.y && this.x == virus.x) {
+                    console.log("stucl")
+                    return true;
+                }
+            })
+
+            return false;
+        }
+
+        draw() {
+            if (this.isDraw()) {
+                const image = new Image();
+                image.src = 'assets/virus.png';
+                image.onload = () => {
+                    this.context.drawImage(image, this.x, this.y, this.width, this.height);
+                    this.y += this.step;
+                }
+            }
+        }
+
+
+    }
+
+    // Function draw Game
     const drawTile = (x) => {
         const context = getContext();
         const height = getCanvas().height;
@@ -171,11 +224,14 @@ document.addEventListener('DOMContentLoaded', function () {
         context.fillRect(x, 0, 100, height);
     }
 
-    const drawButton = (x) => {
+    const drawButton = (x, filename) => {
         const context = getContext();
         const y = getCanvas().height - buttonHeight;
-        context.fillStyle = '#3b8bad';
-        context.fillRect(x, y, 100, buttonHeight);
+        const image = new Image();
+        image.src = `assets/${filename}`;
+        image.onload = () => {
+            context.drawImage(image, x, y, 100, buttonHeight);
+        }
     }
 
     const drawLine = () => {
@@ -195,19 +251,31 @@ document.addEventListener('DOMContentLoaded', function () {
         context.globalAlpha = 1;
     }
 
-    const background = () => {
+    const draw = () => {
+        intervalVirus = setInterval(() => {
+            const virus = new Virus();
+            virusList.push(virus);
+        }, 1100);
+        invervalGame = setInterval(() => {
         const arrayPosition = [0, 101, 202, 303]
-        arrayPosition.forEach(position => {
+            const fileButtonName = ['D.jpg', 'F.jpg', 'J.jpg', 'K.jpg']
+            arrayPosition.forEach((position, index) => {
             drawTile(position);
-            drawButton(position);
+                drawButton(position, fileButtonName[index]);
 
         });
         drawLine();
         arrayPosition.forEach(position => {
             drawDangerZone(position);
         });
+
+
+            virusList.forEach(virus => {
+                virus.draw();
+            });
+        }, 200);
     }
-    // End of Component Game
+    // End of Draw Game
     openInstructionScreen();
-    background();
+
 });
