@@ -32,7 +32,7 @@
                 <p class="countdown-counter">3</p>
             </div>
         </div>
-        <div id="main-screen" class="screen">
+        <div id="main-screen" tabindex="0" class="screen">
             <div class="sidebar">
                 <div class="player-info">
                     <div class="player-info-item">
@@ -57,20 +57,20 @@
                         Virus Slayer
                     </h4>
                     <div class="menu-detail">
-                        <p>Restart</p>
-                        <p>Quit</p>
+                        <p id="menu-restart">Restart</p>
+                        <p id="menu-quit">Quit</p>
                     </div>
                 </div>
             </div>
         </div>
-        <div id="pause-screen" class="screen screen-overlay">
+        <div id="pause-screen" tabindex="0" class="screen screen-overlay">
             <div class="dialog">
                 <h5 class="dialog-title">
                     Pause
                 </h5>
                 <div class="button-group">
-                    <button style="margin-right: 10px;" class="btn btn-secondary">Continue</button>
-                    <button style="margin-left: 10px;" class="btn btn-primary">Restart</button>
+                    <button style="margin-right: 10px;" id="btn-resume" class="btn btn-secondary">Continue</button>
+                    <button style="margin-left: 10px;" id="btn-restart" class="btn btn-primary">Restart</button>
                 </div>
             </div>
         </div>

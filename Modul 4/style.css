@@ -184,6 +184,13 @@ body {
 
 .menu-control .menu-detail {
     margin-top: 30px;
+    font-size: 1.3rem;
+    }
+    
+    
+    .menu-control .menu-detail p {
+        margin-top: 10px;
+        cursor: pointer;
 }
 
 .screen-overlay {
