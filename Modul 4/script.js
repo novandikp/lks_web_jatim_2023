@@ -2,9 +2,9 @@ document.addEventListener("DOMContentLoaded", function () {
     let stateGame = "instruction";
     let intervalCountdown = null;
     let intervalTimer = null;
-    let invervalGame = null;
     let intervalVirus = null;
     let playerName = "";
+    const gameOverLose = 10;
     const buttonHeight = 150;
     const lineHeight = 10;
     const dangerHeight = 400;
@@ -62,6 +62,13 @@ document.addEventListener("DOMContentLoaded", function () {
         e.preventDefault();
         resumeGame();
     });
+
+    document
+        .querySelector("#end-screen button")
+        .addEventListener("click", function (e) {
+            e.preventDefault();
+            restartGame();
+        });
 
     document
         .getElementById("btn-restart")
@@ -154,6 +161,9 @@ document.addEventListener("DOMContentLoaded", function () {
         virusList = [];
         openInstructionScreen();
         lose = 0;
+        score = 0;
+        document.getElementById("score-value").innerHTML = score;
+        document.getElementById("fail-value").innerHTML = lose;
     }
 
     const restartGame = () => {
@@ -162,6 +172,9 @@ document.addEventListener("DOMContentLoaded", function () {
         virusList = [];
         openCountdownScreen();
         lose = 0;
+        score = 0;
+        document.getElementById("score-value").innerHTML = score;
+        document.getElementById("fail-value").innerHTML = lose;
     }
 
     const startTimer = (clear = false) => {
@@ -192,6 +205,12 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     const endGame = () => {
+        pauseGame();
+        document.getElementById("score").innerHTML = score;
+        document.getElementById("time").innerHTML = document.getElementById(
+            "time-value"
+        ).innerHTML;
+        document.getElementById("player").innerHTML = playerName;
         stateGame = "end";
         setActiveScreen("end-screen", true);
     };
@@ -220,7 +239,6 @@ document.addEventListener("DOMContentLoaded", function () {
             this.x = this.xList[Math.round(Math.random() * this.xList.length)];
             while (this.isStack()) {
                 this.x = this.xList[Math.round(Math.random() * this.xList.length)];
-                // this.y = 0;
             }
             this.context = getContext();
         }
@@ -231,7 +249,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         isDraw() {
             return (
-                this.y < getCanvas().height - (buttonHeight + lineHeight + this.height) + 5 && !this.hit
+                this.y < getCanvas().height - (buttonHeight + lineHeight + this.height) && !this.hit
             );
         }
 
@@ -249,7 +267,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     return true;
                 }
             }
-
             return false;
         };
 
@@ -337,18 +354,17 @@ document.addEventListener("DOMContentLoaded", function () {
             drawDangerZone(position);
         });
         virusList = virusList.filter((virus) => {
-            if (virus.isDraw()) {
-                virus.draw();
-            }
-            if (!virus.isDraw() && !virus.hit) {
+            if (!virus.isDraw() && !virus.hit && virus.x != undefined) {
                 lose++;
-                alert();
+            }
+            if (lose >= gameOverLose) {
+                endGame();
             }
             return virus.isDraw();
         });
-        // virusList.forEach((virus) => {
-        //     virus.draw();
-        // });
+        virusList.forEach((virus) => {
+            virus.draw();
+        });
         document.getElementById("fail-value").innerHTML = lose;
         if (stateGame == "playing") {
             requestAnimationFrame(draw);
